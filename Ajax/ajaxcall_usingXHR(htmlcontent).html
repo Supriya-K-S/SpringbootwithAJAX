@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src=https://code.jquery.com/jquery-3.6.0.js></script>
+  </head>
+  <body>
+    <h2>GET Method Example</h2>
+
+    <div id="posts">Student detail</div>
+    <b></b>
+    <input
+      type="button"
+      name="getdatas"
+      id="getdata"
+      value="get data"
+      onclick="apicalls()"
+    />
+
+    <script>
+       function apicalls() {
+        $.ajax({
+          url: 'http://localhost:8080/api/student',
+          type: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          dataType: 'json',
+          success: function (data) {
+            console.log(data)
+          },
+          error: function (jqXHR, textStatus, errorThrown) {},
+          // error: function () {
+          //   console.log('error')
+          // },
+        })
+      }
+      function apicalls() {
+        let xhr = new XMLHttpRequest()
+        xhr.open('GET', 'http://localhost:8080/api/student')
+        xhr.send()
+        xhr.onload = function () {
+          
+         $('#getdata').on('click', function ()  {
+            // let data = JSON.parse(xhr.responseText)
+            // console.log(data)
+            var finalResponse = JSON.stringify(xhr.responseText);
+		    
+		    $("#posts").html("<b>Your response is : " +finalResponse+"</b>");
+        console.log(finalResponse)
+          })
+        }
+      }
+    </script>
+  </body>
+</html>
